@@ -11,8 +11,10 @@ link =" http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?prom
 def test_guest_can_add_product_to_basket():
     browser = webdriver.Chrome()
     page = ProductPage(browser, link)
-    page.open()
-    page.add_product_to_basket()
-    page.should_be_product_name_in_success_message()
+    page.open()  # открываем страницу 
+    page.should_not_be_success_message()
+    page.add_product_to_basket()  # добавляем в корзину
+    page.should_be_product_name_in_success_message() #Название товара в сообщении должно совпадать с тем товаром, который вы действительно добавили
     page.should_be_basket_total_equal_product_price()
+    #page.success_message_should_disappear() #элемент присутствует на странице и должен исчезнуть
     browser.quit()
